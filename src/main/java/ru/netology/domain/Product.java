@@ -1,3 +1,5 @@
+package ru.netology.domain;
+
 public class Product {
     protected String name;
     protected int price;

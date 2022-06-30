@@ -1,3 +1,5 @@
+package ru.netology.domain;
+
 import java.util.Arrays;
 
 public class ProdRepository {
