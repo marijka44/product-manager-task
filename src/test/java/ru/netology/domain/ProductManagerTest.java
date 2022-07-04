@@ -28,6 +28,54 @@ public class ProductManagerTest {
         assertArrayEquals(expected, actual);
 
     }
+    @Test
+    public void shouldFindElementsInEmptyManager() {
+        ProdManager manager = new ProdManager(new ProdRepository());
+
+
+        Product[] actual = manager.searchBy("Bio");
+        Product[] expected = {};
+
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldFindElementsManagerHasOneElement() {
+        ProdManager manager = new ProdManager(new ProdRepository());
+        manager.add(smartphone2);
+
+        Product[] actual = manager.searchBy("Sam");
+        Product[] expected = {};
+
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldFind2Elements() {
+        ProdManager manager = new ProdManager(new ProdRepository());
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(book3);
+        manager.add(smartphone1);
+        manager.add(smartphone2);
+
+        Product[] actual = manager.searchBy("nov");
+        Product[] expected = {book1 ,book3};
+
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldFindElementsWhichIsNot() {
+        ProdManager manager = new ProdManager(new ProdRepository());
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(book3);
+        manager.add(smartphone1);
+        manager.add(smartphone2);
+
+        Product[] actual = manager.searchBy("Abc");
+        Product[] expected = {};
+
+        assertArrayEquals(expected, actual);
+    }
 
     @Test
     public void productRemovalById() {
@@ -84,23 +132,5 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
 
-    }
-
-    @Test
-    public void matchesShouldReturnTrue() {
-        ProdManager manager = new ProdManager(new ProdRepository());
-
-        Boolean actual = manager.matches(smartphone2, "Moto");
-        Boolean expected = true;
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void matchesShouldReturnFalse() {
-        ProdManager manager = new ProdManager(new ProdRepository());
-
-        Boolean actual = manager.matches(smartphone2, "test");
-        Boolean expected = false;
-        assertEquals(expected, actual);
     }
 }
